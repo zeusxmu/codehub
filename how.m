@@ -1,31 +1,34 @@
 function how(str)
-% lookup useful codes
+% A quick lookup for how to code.
+% Zheguang Zou, 2019
 
 current = 0;
 start = 0;
 fid = fopen('how.m');
 while 1
-    tline = fgetl(fid);
-    if ~ischar(tline), break; end
-	if contains(tline, 'function codes______________________________'), start = 1; end
-    if start == 1 && contains(tline, '%%') && contains(lower(tline),lower(str))
-        current = 1; disp(tline);
-    else
-        if current == 1
-            if contains(tline,'%%') 
-			    current = 0;
-				fprintf('\n----\n');
+	tline = fgetl(fid);
+	if ~ischar(tline), break; end
+	if contains(tline, '______________________________'), start = 1; end
+	if start == 1 && contains(tline, '%%') && contains(lower(tline),lower(str))
+		current = 1; 
+		disp(tline);
+	else
+		if current == 1
+			if contains(tline,'%%') 
+			current = 0;
+			fprintf('\n----\n');
 			else
-                disp(tline);
+			disp(tline);
 			end
-        end
-    end
+		end
+	end
 end
 fclose(fid);
 
-%% following are the actual codes
-function codes__________________________________________________()
 return;
+
+% please feel free to add whatever you like below this line
+% __________________________________________________________
 
 %% axis location top right
 ax = gca;
@@ -44,17 +47,20 @@ set(gca,'Layer','top');
 set(gca,'Ydir','reverse');
 
 %% flip/reverse axis
-set(gca,'Xdir','reverse');
-set(gca,'Ydir','reverse');
+set(gca, 'Xdir', 'reverse');
+set(gca, 'Ydir', 'reverse');
 
-%% ticks, ticklabel
-% in MATLAB 2018
-xticks([-3*pi -2*pi -pi 0 pi 2*pi 3*pi])
-xticklabels({'-3\pi','-2\pi','-\pi','0','\pi','2\pi','3\pi'})
-yticks([-3*pi -2*pi -pi 0 pi 2*pi 3*pi])
-yticklabels({'-3\pi','-2\pi','-\pi','0','\pi','2\pi','3\pi'})
+%% ticks, xticks, yticks
+xticks([]);
+yticks([]);
+
+%% ticklabels, xticklabels, yticklabels
+% in 2018
+xticklabels({});
+yticklabels({});
 % in old versions
-set(gca,'xticklabel',0:50:500)
+set(gca, 'xticklabel', []);
+set(gca, 'yticklabel', []);
 
 %% fontsize
 set(findall(gcf,'-property','FontSize'),'FontSize',fsz);
