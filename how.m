@@ -4,29 +4,27 @@ function how(str)
 current = 0;
 start = 0;
 fid = fopen('how.m');
-
 while 1
     tline = fgetl(fid);
     if ~ischar(tline), break; end
 	if contains(tline, 'function codes______________________________'), start = 1; end
     if start == 1 && contains(tline, '%%') && contains(lower(tline),lower(str))
-        current = 1;
-        disp(tline);
+        current = 1; disp(tline);
     else
-        if current
-            if contains(tline,'%%')
-                current = 0;
-				disp(' ');
-            else
+        if current == 1
+            if contains(tline,'%%') 
+			    current = 0;
+				fprintf('\n----\n');
+			else
                 disp(tline);
-            end
+			end
         end
     end
 end
 fclose(fid);
 
 %% following are the actual codes
-function codes____________________________________________________________________________()
+function codes__________________________________________________()
 return;
 
 %% axis location top right
