@@ -1,13 +1,15 @@
-function code(str)
-%V   lookup useful codes
+function how(str)
+% lookup useful codes
 
 current = 0;
-fid=fopen('how.m');
+start = 0;
+fid = fopen('how.m');
 
 while 1
     tline = fgetl(fid);
     if ~ischar(tline), break; end
-    if contains(tline, '%%') && contains(lower(tline),lower(str))
+	if contains(tline, 'function codes______________________________'), start = 1; end
+    if start == 1 && contains(tline, '%%') && contains(lower(tline),lower(str))
         current = 1;
         disp(tline);
     else
@@ -24,16 +26,8 @@ end
 fclose(fid);
 
 %% following are the actual codes
-function codes______________________________()
-
-%% Readme
-% This file keeps all coding examples for a quick lookup.
-% To loop up an example, use 'code' function:
-% code axis
+function codes____________________________________________________________________________()
 return;
-
-%% common paths for to()
-addpath(to('plots'));
 
 %% axis location top right
 ax = gca;
@@ -51,17 +45,17 @@ box on;
 set(gca,'Layer','top');
 set(gca,'Ydir','reverse');
 
-%% reverse axis
+%% flip/reverse axis
 set(gca,'Xdir','reverse');
 set(gca,'Ydir','reverse');
 
 %% ticks, ticklabel
-% 2018
+% in MATLAB 2018
 xticks([-3*pi -2*pi -pi 0 pi 2*pi 3*pi])
 xticklabels({'-3\pi','-2\pi','-\pi','0','\pi','2\pi','3\pi'})
 yticks([-3*pi -2*pi -pi 0 pi 2*pi 3*pi])
 yticklabels({'-3\pi','-2\pi','-\pi','0','\pi','2\pi','3\pi'})
-% old version
+% in old versions
 set(gca,'xticklabel',0:50:500)
 
 %% fontsize
